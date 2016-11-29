@@ -3,3 +3,4 @@ Pending:
 - Dynamic Attributes
 - Pagination
 - Select rows
+- Column order
