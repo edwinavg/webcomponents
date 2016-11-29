@@ -1,4 +1,4 @@
 Pendiente:
-- Atributos dinamicos
-- Paginación
-- Filas seleccionables
+- Dynamic Attributes
+- Pagination
+- Select rows
