@@ -40,6 +40,7 @@ var customTable = (function(){
 			if(rowData[properties[i]] !== undefined){
 				cell = document.createElement('td');
 				cell.textContent = rowData[properties[i]];
+				row.setAttribute('data-row',JSON.stringify(rowData));
 				row.appendChild(cell);
 			}
 		}
@@ -55,10 +56,17 @@ var customTable = (function(){
 	function getBody(properties, data){
 		var tbody 				= document.createElement('tbody'),
 				dataLen  			= data.length,
-				i 						= 0;
+				i 						= 0,
+				emptyRow      = document.createElement('tr');
 
 		for(; dataLen > i; i++){
 			tbody.appendChild(getRow(properties ,data[i]));
+		}
+
+		if(dataLen === 0){
+			emptyRow.setAttribute('colspan', properties.length);
+			emptyRow.textContent = 'No data found';
+			tbody.appendChild(emptyRow);
 		}
 
 		return tbody;
@@ -80,6 +88,49 @@ var customTable = (function(){
 
 		return properties;
 	};
+
+		 /**
+   * @memberof customTable#
+   * @name selectable
+   * @description Selecciona visualmente la fila de la tabla
+   **/
+	function selectable(event){
+		var rows = this.parentNode.getElementsByTagName('tr'),
+				len = rows.length,
+				i=0;
+
+		if(this.classList.contains('selected-row')){
+			this.classList.remove('selected-row');
+		}else{
+
+			for(; len > i; i++){
+				rows[i].classList.remove('selected-row');
+			}
+
+			this.classList.add('selected-row');
+		}
+	};
+
+	 /**
+   * @memberof customTable#
+   * @name addListeners
+   * @description Añade los eventos a la tabla
+   **/
+	function addListeners(idTable){
+		var rows = document.getElementById(idTable).getElementsByTagName('tbody')[0].getElementsByTagName('tr'),
+				len = rows.length,
+				i=0;
+
+		if(items[idTable].selectable){
+			document.getElementById(idTable).classList.add('selectable');
+
+			for(; len > i; i++){
+				rows[i].addEventListener('click',selectable);
+			}
+		}
+
+	};
+
 	/**
    * @memberof customTable#
    * @name updateTable
@@ -95,6 +146,24 @@ var customTable = (function(){
 		table.setAttribute('data',JSON.stringify(data));
 		tbody.parentNode.removeChild(tbody); //IE FIX
 		table.appendChild(tempTbody);
+
+		addListeners(idTable);
+	};
+
+	/**
+   * @memberof customTable#
+   * @name getSelectedRow
+   * @description Devuelve la fila seleccionada
+   **/
+	component.getSelectedRow = function(idTable){
+		var selected = document.getElementById(idTable).getElementsByClassName('selected-row')[0],
+				datos = false;
+
+		if(selected){
+			datos = JSON.parse(selected.getAttribute('data-row'));
+		}
+
+		return datos;
 	};
 
 	/**
@@ -138,11 +207,14 @@ var customTable = (function(){
 
 		items[this.id] = {
 			data:data,
-			properties: properties
+			properties: properties,
+			selectable: header.selectable ? header.selectable : false
 		};
 
 		_self.appendChild(thead);
 		_self.appendChild(tbody);
+
+		addListeners(this.id);
 	};
 
 	/**
@@ -161,6 +233,7 @@ var customTable = (function(){
 		getTable:component.getTable,
 		getContext:component.getContext,
 		updateTable:component.updateTable,
+		getSelectedRow:component.getSelectedRow,
 		init:component.init
 	}
 

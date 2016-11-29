@@ -49,6 +49,15 @@
 .table{
 	border-collapse: collapse;
 }
+
+.selected-row{
+  background:#c1c1c1;
+}
+
+.selectable tbody tr{
+  cursor:pointer;
+}
+
 </style>
 
 <script>
@@ -84,7 +93,7 @@
 
 <button onclick="actualizarTabla()" id="js-update-table">Actualizar tabla</button>
 
-<table class="table" id="table-residente" is="custom-table" header="{'template':[{'key':'documentType','value':'Tipo de Identificacion'},{'key':'documentNum','value':'Identificacion'},{'key':'searchName','value':'Nombre y apellidos / Razon social'},{'key':'countryCode','value':'Pais'}]}" data="[{'endpoints':null,'documentTypeCode':'01','documentType':'NIF/CIF','documentNum':'R111111111','searchName':'Residente 1','countryCode':'AD','country':null,'rowId':'0049&1'},{'endpoints':null,'documentTypeCode':'02','documentType':'NIF-IVA','documentNum':'R222222222','searchName':'Residente 2','countryCode':'AF','country':null,'rowId':'0049&2'},{'endpoints':null,'documentTypeCode':'02','documentType':'NIF-IVA','documentNum':'R333333333','searchName':'Residente 3','countryCode':'AH','country':null,'rowId':'0049&3'},{'endpoints':null,'documentTypeCode':'02','documentType':'NIF-IVA','documentNum':'R444444444','searchName':'Residente 4','countryCode':'AJ','country':null,'rowId':'0049&4'},{'endpoints':null,'documentTypeCode':'02','documentType':'NIF-IVA','documentNum':'R555555555','searchName':'Residente 5','countryCode':'AL','country':'ALBANIA','rowId':'0049&5'},{'endpoints':null,'documentTypeCode':'03','documentType':'PASAPORTE','documentNum':'R666666666','searchName':'Residente 6','countryCode':'AN','country':'ANTILLAS HOLANDESAS','rowId':'0049&6'},{'endpoints':null,'documentTypeCode':'03','documentType':'PASAPORTE','documentNum':'R777777777','searchName':'Residente 7','countryCode':'AP','country':null,'rowId':'0049&7'},{'endpoints':null,'documentTypeCode':'06','documentType':'OTRO DOCUMENTO PROBATORIO','documentNum':'R888888888','searchName':'Residebnte 8','countryCode':'AR','country':'ARGENTINA','rowId':'0049&8'},{'endpoints':null,'documentTypeCode':'03','documentType':'PASAPORTE','documentNum':'NR1111111111','searchName':'No residente 1','countryCode':'AE','country':null,'rowId':'0028&9'},{'endpoints':null,'documentTypeCode':'03','documentType':'PASAPORTE','documentNum':'NR2222222222','searchName':'No residente 2','countryCode':'AG','country':'ANTIGUA Y BARBUDA','rowId':'0028&10'}]">
+<table class="table" id="table-residente" is="custom-table" header="{'template':[{'key':'documentType','value':'Tipo de Identificacion'},{'key':'documentNum','value':'Identificacion'},{'key':'searchName','value':'Nombre y apellidos / Razon social'},{'key':'countryCode','value':'Pais'}],'selectable':true}" data="[{'endpoints':null,'documentTypeCode':'01','documentType':'NIF/CIF','documentNum':'R111111111','searchName':'Residente 1','countryCode':'AD','country':null,'rowId':'0049&1'},{'endpoints':null,'documentTypeCode':'02','documentType':'NIF-IVA','documentNum':'R222222222','searchName':'Residente 2','countryCode':'AF','country':null,'rowId':'0049&2'},{'endpoints':null,'documentTypeCode':'02','documentType':'NIF-IVA','documentNum':'R333333333','searchName':'Residente 3','countryCode':'AH','country':null,'rowId':'0049&3'},{'endpoints':null,'documentTypeCode':'02','documentType':'NIF-IVA','documentNum':'R444444444','searchName':'Residente 4','countryCode':'AJ','country':null,'rowId':'0049&4'},{'endpoints':null,'documentTypeCode':'02','documentType':'NIF-IVA','documentNum':'R555555555','searchName':'Residente 5','countryCode':'AL','country':'ALBANIA','rowId':'0049&5'},{'endpoints':null,'documentTypeCode':'03','documentType':'PASAPORTE','documentNum':'R666666666','searchName':'Residente 6','countryCode':'AN','country':'ANTILLAS HOLANDESAS','rowId':'0049&6'},{'endpoints':null,'documentTypeCode':'03','documentType':'PASAPORTE','documentNum':'R777777777','searchName':'Residente 7','countryCode':'AP','country':null,'rowId':'0049&7'},{'endpoints':null,'documentTypeCode':'06','documentType':'OTRO DOCUMENTO PROBATORIO','documentNum':'R888888888','searchName':'Residebnte 8','countryCode':'AR','country':'ARGENTINA','rowId':'0049&8'},{'endpoints':null,'documentTypeCode':'03','documentType':'PASAPORTE','documentNum':'NR1111111111','searchName':'No residente 1','countryCode':'AE','country':null,'rowId':'0028&9'},{'endpoints':null,'documentTypeCode':'03','documentType':'PASAPORTE','documentNum':'NR2222222222','searchName':'No residente 2','countryCode':'AG','country':'ANTIGUA Y BARBUDA','rowId':'0028&10'}]">
 </table>
 
 </body>
