@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>KeyPress search</title>
+	<link rel="stylesheet" href="">
+
+	<style>
+		body{
+			width:50%;
+			padding-top:50px;
+			margin:0 auto;
+		}
+
+		.list-container{
+			height: 300px;
+			overflow: hidden;
+			overflow-y: auto;
+		}
+
+		.list{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+
+		.list-item{
+			padding:5px;
+			border-bottom:1px solid #e1e1e1;
+			cursor:pointer;
+		}
+
+		.list-item:last-child(){
+			border-bottom:0;
+		}
+
+		.selected, .list-item:hover{
+			background:#e1e1e1;
+		}
+		.custom-input{
+			height: 20px;
+			border:1px solid #e1e1e1;
+			border-radius: 3px;
+			padding:5px;
+		}
+	</style>
+	<script>
+			var keySearchAux = {
+            counter:0,
+            key:''
+          };
+
+		 function keySearch(e){
+        var i   = 0,
+            list = document.getElementById('list').getElementsByTagName('li'),
+            len = list.length,
+            tempList = [];
+
+        // Se crea un listado temporal de los elementos buscados
+        for(; len > i; i++){
+          if (list[i].textContent.toLowerCase()[0].indexOf(e.key.toLowerCase()) !== -1){
+            tempList.push(list[i]);
+          }
+        }
+
+        if(tempList.length === 0){
+          keySearchAux.counter = 0;
+          return;
+        }
+
+        // Condicional que reinicia la busqueda
+        if( keySearchAux.counter === tempList.length || keySearchAux.key !== e.key || keySearchAux.counter === 0){
+          keySearchAux.counter = 0
+          keySearchAux.key = e.key;
+        }
+
+         // Se quitan todas las clases
+        for(i=0; len > i; i++){
+          list[i].classList.remove('selected');
+        }
+
+        tempList[keySearchAux.counter].classList.add('selected');
+        tempList[keySearchAux.counter].scrollIntoView();
+
+        keySearchAux.counter++;
+     }
+
+     function cleanSearh(e){
+   		  var i   = 0,
+          list = document.getElementById('list').getElementsByTagName('li'),
+          len = list.length;
+
+        // Se quitan todas las clases
+        for(i=0; len > i; i++){
+          list[i].classList.remove('selected');
+        }
+
+        document.getElementById('list').scrollIntoView();
+     }
+
+     function selectValue(e){
+     		document.getElementById('custom-input').textContent = e.srcElement.textContent;
+     		cleanSearh();
+     }
+	</script>
+</head>
+<body>
+	<h3>Keypress Search</h3>
+	<div id="custom-input" class="custom-input" tabindex="1" onkeypress="keySearch(event)"></div>
+	<div class="list-container">
+		<ul id="list" class="list" onmouseleave="cleanSearh(event)">
+			<li class="list-item" onclick="selectValue(event)" data-value="AO0004">Actualizar balances definitivos                   </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AO0005">Actualizar balances provisionales                 </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0028">Asignaci¾n de polÝtica automßtica                 </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AO0006">Asignaci¾n de polÝtica nueva                      </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0010">Cogesti¾n con recuperaciones / DNP                </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0021">Contactar con el gestor comercial                 </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0008">Crecer con el cliente                             </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0013">Estudiar nueva refinanciaci¾n del cliente         </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0012">Estudiar reconducci¾n del cliente                 </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0011">Estudiar restructuraci¾n del cliente              </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0019">Gesti¾n solo de papel de excelente calidad        </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0020">Hacer hincapie en garantÝas del cliente           </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0007">Mantener exposición                               </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0005">Minorar riesgos a largo plazo                     </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0004">Minorar todos los riesgos (Minorar Riesgo financie</li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0006">Minorar Riesgo financiero                         </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0027">Notificar de error (estandarizado y subestandar)  </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0026">Notificar oficina en caso de cambio de polÝtica   </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AO0059">NUEVO Revisi¾n PolÝtica                           </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0009">Plan especial para clientes DNP                   </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0015">Poner al dÝa (gesti¾n del recobro)                </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0017">Revisar lÝmite                                    </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0025">Revisar lÝmite y en caso necesario, indicar a la o</li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0016">Revisar papel en curso y si existe riesgo de devol</li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0018">Revisar riesgo en curso                           </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AO0001">Revisi¾n Hoja Informaci¾n                         </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AO0003">Revisi¾n PolÝtica                                 </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AO0002">Revisi¾n Rating                                   </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0003">Salir de riesgo a largo plazo                     </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0002">Salir de todos los riesgos                        </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0014">Si es necesario, estudiar refinanciaci¾n          </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0001">Tomar garantÝas reales                            </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0024">Valoraci¾n del cliente (como evento informativo)  </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0023">Valoraci¾n del cliente para reanimar              </li>
+			<li class="list-item" onclick="selectValue(event)" data-value="AE0022">Visitar al cliente                                </li>
+		</ul>
+	</div>
+
+</body>
+</html>
